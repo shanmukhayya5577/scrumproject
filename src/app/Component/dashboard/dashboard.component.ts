@@ -10,7 +10,7 @@ import { ApiService } from 'src/app/Service/api.service';
 })
 export class DashboardComponent implements OnInit {
 
-
+editFormID!:number
   formValue !: FormGroup;
   employeeObj : Employee = new Employee();
   employeeData : Employee[]=[];
@@ -19,7 +19,6 @@ export class DashboardComponent implements OnInit {
 
  ngOnInit(): void {
    this.formValue = this.formBuilder.group({
-     id:[''],
      name: [''],
      age: [''],
      job: [''],
@@ -28,10 +27,19 @@ export class DashboardComponent implements OnInit {
    this.getAllEmployee()
    
  }
-
-   postEmployeeDetails(){
-
-     
+get name(){
+  return this.formValue.get('name')
+}
+get age(){
+  return this.formValue.get('age')
+}
+get job(){
+  return this.formValue.get('job')
+}
+get salary(){
+  return this.formValue.get('salary')
+}
+   postEmployeeDetail(){
      this.employeeObj.name=this.formValue.value.name;
      this.employeeObj.age=this.formValue.value.age;
      this.employeeObj.job=this.formValue.value.job;
@@ -42,12 +50,12 @@ export class DashboardComponent implements OnInit {
      console.log(this.employeeObj.job);
      console.log(this.employeeObj.salary);
        this.api.postEmployee(this.employeeObj).subscribe(res=>{
-         console.log(res);
-         alert("Employee Added Successfully") 
+         console.log(res); 
          this.formValue.reset()
-
+         this.getAllEmployee()
        })
-       this.getAllEmployee()
+      const buttonVal=document.getElementById('closebutton')
+       buttonVal.click()
    }
 
    getAllEmployee(){
@@ -55,12 +63,34 @@ export class DashboardComponent implements OnInit {
        this.employeeData = res
      })
    }
+   onEdit(val:any){
+this.editFormID=val.id
+    this.name.patchValue(val.name)
+    this.age.patchValue(val.age)
+    this.job.patchValue(val.job)
+    this.salary.patchValue(val.salary) 
+   }
 
+
+   onupdate(){
+    this.employeeObj.name=this.formValue.value.name;
+    this.employeeObj.age=this.formValue.value.age;
+    this.employeeObj.job=this.formValue.value.job;
+    this.employeeObj.salary=this.formValue.value.salary;
+    this.api.updateEmployee(this.employeeObj,this.editFormID).subscribe((x)=>{
+      console.log('data edited'+x);
+      this.getAllEmployee()
+    })
+    const buttonVal=document.getElementById('closebutton')
+    buttonVal.click()
+    this.formValue.reset()
+   }
    deleteEmployee(row:any){
      this.api.deleteEmployee(row.id).subscribe(res=>{
        alert("Employee Deleted")
        this.getAllEmployee()
      })
    }
+
 
 }

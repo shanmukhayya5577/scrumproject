@@ -2,7 +2,7 @@
   "posts": [
     {
       "id": 1,
-      "name": "priyanka MJ",
+      "name": "kiran",
       "age": 24,
       "job": "Associate",
       "salary": 25000
@@ -12,6 +12,13 @@
       "name": "priyanka MJ",
       "age": 25,
       "job": "associate",
+      "salary": 25000
+    },
+    {
+      "id": 3,
+      "name": "kiran",
+      "age": 24,
+      "job": "Associate",
       "salary": 25000
     }
   ],
