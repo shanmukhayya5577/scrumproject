@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class employee {\n  constructor() {\n    this.fullName = '';\n    this.designation = '';\n    this.salary = 0;\n    this.age = 0;\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}
