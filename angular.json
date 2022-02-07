@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "scrumproject"
+    }
+  },
+  "defaultProject": "scrumproject",
+  "cli": {
+    "analytics": "e297328e-3efe-4cc9-b2bf-ba2542658b84"
+  }
 }
